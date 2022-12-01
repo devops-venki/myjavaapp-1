@@ -6,6 +6,7 @@ pipeline {
 
         stage("Build Code"){
             steps {
+                cleanWS()
                 script {
 
                     sh """
