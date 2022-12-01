@@ -36,6 +36,20 @@ pipeline {
                 echo "Uploading Artifacts..."
             }
         }
+
+        stage("Deploy DEV"){
+            steps {
+                script {
+                  sh """  
+                   scp -i tomcat-key.pem target/myapp.war \
+                   -o StrictHostKeyChecking=no \
+                   ubuntu@ec2-13-127-240-83.ap-south-1.compute.amazonaws.com:/opt/tomcat/webapps
+
+                  """
+                }
+            }
+        }
+
     }
     post {
         always {
@@ -43,3 +57,4 @@ pipeline {
         }
     }
 }
+
