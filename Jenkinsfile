@@ -6,13 +6,12 @@ pipeline {
 
         stage("Build Code"){
             steps {
-                cleanWs()
                 script {
 
                     sh """
-                    mvn install
-                    mv target/*.war target/myapp.war
-                    ls -lrt target/*
+                        mvn install
+                        mv target/*.war target/myapp.war
+                        ls -lrt target/*
                     """
                 }
             }
@@ -36,6 +35,11 @@ pipeline {
             steps {
                 echo "Uploading Artifacts..."
             }
+        }
+    }
+    post {
+        always {
+             cleanWs()
         }
     }
 }
