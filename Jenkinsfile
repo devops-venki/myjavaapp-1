@@ -8,7 +8,11 @@ pipeline {
             steps {
                 script {
 
-                    sh "mvn install"
+                    sh """
+                    mvn install
+                    mv target/*.war target/myapp.war
+                    ls -lrt target/*
+                    """
                 }
             }
         }
