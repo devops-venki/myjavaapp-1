@@ -70,6 +70,24 @@ pipeline {
             }
         }
 
+        stage("Deploy PROD"){
+             input {
+                message "Should we continue?"
+                ok "Yes, we should."
+            }
+            steps {
+                script {
+                  sh """  
+                   chmod 400 tomcat-key.pem
+                   scp -o StrictHostKeyChecking=no \
+                   -i tomcat-key.pem target/myapp.war \
+                   ubuntu@${PROD_SERVER}:/opt/tomcat/webapps
+
+                  """
+                }
+            }
+        }
+
     }
     post {
         always {
