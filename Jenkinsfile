@@ -25,5 +25,16 @@ pipeline {
                 }
             }
         }
+        stage("Code Analysis"){
+            steps {
+                echo "Code Analysis....."
+            }
+        }
+
+        stage("Push Artifacts"){
+            steps {
+                echo "Uploading Artifacts..."
+            }
+        }
     }
 }
