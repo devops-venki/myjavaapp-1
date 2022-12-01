@@ -1,6 +1,11 @@
 pipeline {
 
     agent any
+    environment{
+        DEV_SERVER="ec2-13-127-240-83.ap-south-1.compute.amazonaws.com"
+        UAT_SERVER="ec2-13-234-38-235.ap-south-1.compute.amazonaws.com"
+        PROD_SERVER="ec2-13-234-32-64.ap-south-1.compute.amazonaws.com"
+    }
 
     stages {
 
@@ -44,7 +49,21 @@ pipeline {
                    chmod 400 tomcat-key.pem
                    scp -o StrictHostKeyChecking=no \
                    -i tomcat-key.pem target/myapp.war \
-                   ubuntu@ec2-13-127-240-83.ap-south-1.compute.amazonaws.com:/opt/tomcat/webapps
+                   ubuntu@${DEV_SERVER}:/opt/tomcat/webapps
+
+                  """
+                }
+            }
+        }
+
+        stage("Deploy UAT"){
+            steps {
+                script {
+                  sh """  
+                   chmod 400 tomcat-key.pem
+                   scp -o StrictHostKeyChecking=no \
+                   -i tomcat-key.pem target/myapp.war \
+                   ubuntu@${UAT_SERVER}:/opt/tomcat/webapps
 
                   """
                 }
