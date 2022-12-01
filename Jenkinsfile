@@ -41,8 +41,8 @@ pipeline {
             steps {
                 script {
                   sh """  
-                   scp -i tomcat-key.pem target/myapp.war \
-                   -o StrictHostKeyChecking=no \
+                   scp -o StrictHostKeyChecking=no \
+                   -i tomcat-key.pem target/myapp.war \
                    ubuntu@ec2-13-127-240-83.ap-south-1.compute.amazonaws.com:/opt/tomcat/webapps
 
                   """
