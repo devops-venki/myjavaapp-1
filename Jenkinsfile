@@ -1,37 +1,24 @@
 pipeline {
+
     agent any
-    environment {
-       REPO_URL="https://github.com/doggadevops/war-web-project"
-    }
-    stages{
-        stage("Build code"){
-            steps{
-                script{
-                    sh """
-                    ls -lrt
-                    mvn install
-                    """
-                }
-            }
-        }
-        stage("Run Unit Test"){
-            steps{
+
+    stages {
+
+        stage("Build Code"){
+            steps {
                 script {
-                    sh """
-                    mvn test
-                    """
+
+                    sh "mvn install"
                 }
-            }
-        }
-        stage("Code Analysis"){
-            steps{
-                echo "Running Code Analysis..."
             }
         }
 
-        stage("Push Artifacts"){
-            steps{
-                echo "Pushing Artifacts..."
+        stage("Run Unit Tests"){
+            steps {
+                script {
+
+                    sh "mvn test"
+                }
             }
         }
     }
