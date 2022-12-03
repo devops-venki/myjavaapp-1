@@ -5,17 +5,27 @@
 
                     stage("build code") {
 
-                            echo 'building code..'
+                        steps {
+                             echo 'building code..'
                             }
 
-                    stage("Testinng") {
+                        }
 
-                            echo 'Testing code..'
+                            stage("Testinng") {
+
+                                steps {
+                                    echo 'Testing code..'
                             }
 
-                    stage("Deploy") {
-                            echo 'Deploying code...'
+                                }
+
+                              stage("Deploy") {
+                                steps {
+                                    echo 'Deploying code...'
                             }
+
+                                }
+                            
                     }
 
 
