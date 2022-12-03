@@ -25,6 +25,12 @@
                             }
 
                                 }
+                        stage("Artifacts") {
+
+                            steps {
+                            echo 'artifactory code'
+                            }
+                    }
                             
                     }
 
